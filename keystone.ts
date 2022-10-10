@@ -9,6 +9,7 @@ import { User } from './schemas/User';
 import { Fundraiser } from './schemas/Fundraiser';
 import { FundraiserImage } from './schemas/FundraiserImage';
 import { insertSeedData } from './seed-data';
+import { sendPasswordResetEmail } from './lib/mail';
 
 const databaseURL =
   process.env.DATABASE_URL || 'mongodb://localhost/keystone-fundeserved';
@@ -28,7 +29,8 @@ const { withAuth } = createAuth({
   },
   passwordResetLink: {
     async sendToken(args) {
-      console.log(args);
+      // send the email
+      await sendPasswordResetEmail(args.token, args.identity);
     },
   },
 });
