@@ -30,10 +30,7 @@ export default function Home() {
           FundraiserImage: _allFundraiserImagesMeta {
             count
           }
-          OrderItem: _allOrderItemsMeta {
-            count
-          }
-          Order: _allOrdersMeta {
+          Donation: _allDonationsMeta {
             count
           }
         }

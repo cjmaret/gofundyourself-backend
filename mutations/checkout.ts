@@ -48,20 +48,17 @@ async function checkout(
       throw new Error(err.message);
     });
 
-  const orderItem = {
-    name: fundraiser.name,
-    description: fundraiser.description,
-    amount,
-    photo: { connect: { id: fundraiser.photo.id } },
-  };
-
   // 5. Create the order and return it
-  const order = await context.lists.Order.createOne({
+  const donation = await context.lists.Donation.createOne({
     data: {
       total: charge.amount,
       charge: charge.id,
-      items: { create: orderItem },
       user: { connect: { id: userId } },
+      name: fundraiser.name,
+      description: fundraiser.description,
+      amount,
+      goal: fundraiser.goal,
+      photo: { connect: { id: fundraiser.photo.id } },
     },
     resolveFields: false,
   });
@@ -73,7 +70,8 @@ async function checkout(
       id
       name
       description
-      amount
+      status
+      amountn
       goal
       photo {
         id
@@ -84,7 +82,7 @@ async function checkout(
     `,
   });
 
-  return order;
+  return donation;
 }
 
 export default checkout;

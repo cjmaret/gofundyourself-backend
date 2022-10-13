@@ -8,8 +8,8 @@ import {
 import { User } from './schemas/User';
 import { Fundraiser } from './schemas/Fundraiser';
 import { FundraiserImage } from './schemas/FundraiserImage';
-import { OrderItem } from './schemas/OrderItem';
-import { Order } from './schemas/Order';
+
+import { Donation } from './schemas/Donation';
 import { insertSeedData } from './seed-data';
 import { sendPasswordResetEmail } from './lib/mail';
 import { extendGraphqlSchema } from './mutations';
@@ -59,8 +59,7 @@ export default withAuth(
       User,
       Fundraiser,
       FundraiserImage,
-      OrderItem,
-      Order,
+      Donation,
     }),
     extendGraphqlSchema,
     ui: {
