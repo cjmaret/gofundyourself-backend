@@ -8,8 +8,11 @@ import {
 import { User } from './schemas/User';
 import { Fundraiser } from './schemas/Fundraiser';
 import { FundraiserImage } from './schemas/FundraiserImage';
+import { OrderItem } from './schemas/OrderItem';
+import { Order } from './schemas/Order';
 import { insertSeedData } from './seed-data';
 import { sendPasswordResetEmail } from './lib/mail';
+import { extendGraphqlSchema } from './mutations';
 
 const databaseURL =
   process.env.DATABASE_URL || 'mongodb://localhost/keystone-fundeserved';
@@ -56,7 +59,10 @@ export default withAuth(
       User,
       Fundraiser,
       FundraiserImage,
+      OrderItem,
+      Order,
     }),
+    extendGraphqlSchema,
     ui: {
       // TDO: show the UI only for people who pass this test
       isAccessAllowed: ({ session }) => {

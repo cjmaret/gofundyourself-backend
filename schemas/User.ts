@@ -8,6 +8,6 @@ export const User = list({
     name: text({ isRequired: true }),
     email: text({ isRequired: true, isUnique: true }),
     password: password(),
-    // TODO: add roles, cart, and order
+    orders: relationship({ ref: 'Order.user', many: true }),
   },
 });

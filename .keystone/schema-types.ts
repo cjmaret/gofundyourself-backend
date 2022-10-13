@@ -7,6 +7,13 @@ type Scalars = {
   readonly JSON: import('@keystone-next/types').JSONValue;
 };
 
+export type OrderRelateToManyInput = {
+  readonly create?: ReadonlyArray<OrderCreateInput | null> | null;
+  readonly connect?: ReadonlyArray<OrderWhereUniqueInput | null> | null;
+  readonly disconnect?: ReadonlyArray<OrderWhereUniqueInput | null> | null;
+  readonly disconnectAll?: Scalars['Boolean'] | null;
+};
+
 export type UserWhereInput = {
   readonly AND?: ReadonlyArray<UserWhereInput | null> | null;
   readonly OR?: ReadonlyArray<UserWhereInput | null> | null;
@@ -51,6 +58,9 @@ export type UserWhereInput = {
   readonly email_in?: ReadonlyArray<Scalars['String'] | null> | null;
   readonly email_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
   readonly password_is_set?: Scalars['Boolean'] | null;
+  readonly orders_every?: OrderWhereInput | null;
+  readonly orders_some?: OrderWhereInput | null;
+  readonly orders_none?: OrderWhereInput | null;
   readonly passwordResetToken_is_set?: Scalars['Boolean'] | null;
   readonly passwordResetIssuedAt?: Scalars['String'] | null;
   readonly passwordResetIssuedAt_not?: Scalars['String'] | null;
@@ -114,6 +124,8 @@ export type SortUsersBy =
   | 'name_DESC'
   | 'email_ASC'
   | 'email_DESC'
+  | 'orders_ASC'
+  | 'orders_DESC'
   | 'passwordResetIssuedAt_ASC'
   | 'passwordResetIssuedAt_DESC'
   | 'passwordResetRedeemedAt_ASC'
@@ -127,6 +139,7 @@ export type UserUpdateInput = {
   readonly name?: Scalars['String'] | null;
   readonly email?: Scalars['String'] | null;
   readonly password?: Scalars['String'] | null;
+  readonly orders?: OrderRelateToManyInput | null;
   readonly passwordResetToken?: Scalars['String'] | null;
   readonly passwordResetIssuedAt?: Scalars['String'] | null;
   readonly passwordResetRedeemedAt?: Scalars['String'] | null;
@@ -144,6 +157,7 @@ export type UserCreateInput = {
   readonly name?: Scalars['String'] | null;
   readonly email?: Scalars['String'] | null;
   readonly password?: Scalars['String'] | null;
+  readonly orders?: OrderRelateToManyInput | null;
   readonly passwordResetToken?: Scalars['String'] | null;
   readonly passwordResetIssuedAt?: Scalars['String'] | null;
   readonly passwordResetRedeemedAt?: Scalars['String'] | null;
@@ -408,6 +422,230 @@ export type FundraiserImagesCreateInput = {
   readonly data?: FundraiserImageCreateInput | null;
 };
 
+export type OrderRelateToOneInput = {
+  readonly create?: OrderCreateInput | null;
+  readonly connect?: OrderWhereUniqueInput | null;
+  readonly disconnect?: OrderWhereUniqueInput | null;
+  readonly disconnectAll?: Scalars['Boolean'] | null;
+};
+
+export type OrderItemWhereInput = {
+  readonly AND?: ReadonlyArray<OrderItemWhereInput | null> | null;
+  readonly OR?: ReadonlyArray<OrderItemWhereInput | null> | null;
+  readonly id?: Scalars['ID'] | null;
+  readonly id_not?: Scalars['ID'] | null;
+  readonly id_in?: ReadonlyArray<Scalars['ID'] | null> | null;
+  readonly id_not_in?: ReadonlyArray<Scalars['ID'] | null> | null;
+  readonly name?: Scalars['String'] | null;
+  readonly name_not?: Scalars['String'] | null;
+  readonly name_contains?: Scalars['String'] | null;
+  readonly name_not_contains?: Scalars['String'] | null;
+  readonly name_starts_with?: Scalars['String'] | null;
+  readonly name_not_starts_with?: Scalars['String'] | null;
+  readonly name_ends_with?: Scalars['String'] | null;
+  readonly name_not_ends_with?: Scalars['String'] | null;
+  readonly name_i?: Scalars['String'] | null;
+  readonly name_not_i?: Scalars['String'] | null;
+  readonly name_contains_i?: Scalars['String'] | null;
+  readonly name_not_contains_i?: Scalars['String'] | null;
+  readonly name_starts_with_i?: Scalars['String'] | null;
+  readonly name_not_starts_with_i?: Scalars['String'] | null;
+  readonly name_ends_with_i?: Scalars['String'] | null;
+  readonly name_not_ends_with_i?: Scalars['String'] | null;
+  readonly name_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly name_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly description?: Scalars['String'] | null;
+  readonly description_not?: Scalars['String'] | null;
+  readonly description_contains?: Scalars['String'] | null;
+  readonly description_not_contains?: Scalars['String'] | null;
+  readonly description_starts_with?: Scalars['String'] | null;
+  readonly description_not_starts_with?: Scalars['String'] | null;
+  readonly description_ends_with?: Scalars['String'] | null;
+  readonly description_not_ends_with?: Scalars['String'] | null;
+  readonly description_i?: Scalars['String'] | null;
+  readonly description_not_i?: Scalars['String'] | null;
+  readonly description_contains_i?: Scalars['String'] | null;
+  readonly description_not_contains_i?: Scalars['String'] | null;
+  readonly description_starts_with_i?: Scalars['String'] | null;
+  readonly description_not_starts_with_i?: Scalars['String'] | null;
+  readonly description_ends_with_i?: Scalars['String'] | null;
+  readonly description_not_ends_with_i?: Scalars['String'] | null;
+  readonly description_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly description_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly amount?: Scalars['Int'] | null;
+  readonly amount_not?: Scalars['Int'] | null;
+  readonly amount_lt?: Scalars['Int'] | null;
+  readonly amount_lte?: Scalars['Int'] | null;
+  readonly amount_gt?: Scalars['Int'] | null;
+  readonly amount_gte?: Scalars['Int'] | null;
+  readonly amount_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly amount_not_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly goal?: Scalars['Int'] | null;
+  readonly goal_not?: Scalars['Int'] | null;
+  readonly goal_lt?: Scalars['Int'] | null;
+  readonly goal_lte?: Scalars['Int'] | null;
+  readonly goal_gt?: Scalars['Int'] | null;
+  readonly goal_gte?: Scalars['Int'] | null;
+  readonly goal_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly goal_not_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly dateCreated?: Scalars['String'] | null;
+  readonly dateCreated_not?: Scalars['String'] | null;
+  readonly dateCreated_lt?: Scalars['String'] | null;
+  readonly dateCreated_lte?: Scalars['String'] | null;
+  readonly dateCreated_gt?: Scalars['String'] | null;
+  readonly dateCreated_gte?: Scalars['String'] | null;
+  readonly dateCreated_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly dateCreated_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly photo?: FundraiserImageWhereInput | null;
+  readonly photo_is_null?: Scalars['Boolean'] | null;
+  readonly order?: OrderWhereInput | null;
+  readonly order_is_null?: Scalars['Boolean'] | null;
+};
+
+export type OrderItemWhereUniqueInput = {
+  readonly id: Scalars['ID'];
+};
+
+export type SortOrderItemsBy =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'name_ASC'
+  | 'name_DESC'
+  | 'description_ASC'
+  | 'description_DESC'
+  | 'amount_ASC'
+  | 'amount_DESC'
+  | 'goal_ASC'
+  | 'goal_DESC'
+  | 'dateCreated_ASC'
+  | 'dateCreated_DESC'
+  | 'photo_ASC'
+  | 'photo_DESC'
+  | 'order_ASC'
+  | 'order_DESC';
+
+export type OrderItemUpdateInput = {
+  readonly name?: Scalars['String'] | null;
+  readonly description?: Scalars['String'] | null;
+  readonly amount?: Scalars['Int'] | null;
+  readonly goal?: Scalars['Int'] | null;
+  readonly dateCreated?: Scalars['String'] | null;
+  readonly photo?: FundraiserImageRelateToOneInput | null;
+  readonly order?: OrderRelateToOneInput | null;
+};
+
+export type OrderItemsUpdateInput = {
+  readonly id: Scalars['ID'];
+  readonly data?: OrderItemUpdateInput | null;
+};
+
+export type OrderItemCreateInput = {
+  readonly name?: Scalars['String'] | null;
+  readonly description?: Scalars['String'] | null;
+  readonly amount?: Scalars['Int'] | null;
+  readonly goal?: Scalars['Int'] | null;
+  readonly dateCreated?: Scalars['String'] | null;
+  readonly photo?: FundraiserImageRelateToOneInput | null;
+  readonly order?: OrderRelateToOneInput | null;
+};
+
+export type OrderItemsCreateInput = {
+  readonly data?: OrderItemCreateInput | null;
+};
+
+export type OrderItemRelateToManyInput = {
+  readonly create?: ReadonlyArray<OrderItemCreateInput | null> | null;
+  readonly connect?: ReadonlyArray<OrderItemWhereUniqueInput | null> | null;
+  readonly disconnect?: ReadonlyArray<OrderItemWhereUniqueInput | null> | null;
+  readonly disconnectAll?: Scalars['Boolean'] | null;
+};
+
+export type UserRelateToOneInput = {
+  readonly create?: UserCreateInput | null;
+  readonly connect?: UserWhereUniqueInput | null;
+  readonly disconnect?: UserWhereUniqueInput | null;
+  readonly disconnectAll?: Scalars['Boolean'] | null;
+};
+
+export type OrderWhereInput = {
+  readonly AND?: ReadonlyArray<OrderWhereInput | null> | null;
+  readonly OR?: ReadonlyArray<OrderWhereInput | null> | null;
+  readonly id?: Scalars['ID'] | null;
+  readonly id_not?: Scalars['ID'] | null;
+  readonly id_in?: ReadonlyArray<Scalars['ID'] | null> | null;
+  readonly id_not_in?: ReadonlyArray<Scalars['ID'] | null> | null;
+  readonly total?: Scalars['Int'] | null;
+  readonly total_not?: Scalars['Int'] | null;
+  readonly total_lt?: Scalars['Int'] | null;
+  readonly total_lte?: Scalars['Int'] | null;
+  readonly total_gt?: Scalars['Int'] | null;
+  readonly total_gte?: Scalars['Int'] | null;
+  readonly total_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly total_not_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly items_every?: OrderItemWhereInput | null;
+  readonly items_some?: OrderItemWhereInput | null;
+  readonly items_none?: OrderItemWhereInput | null;
+  readonly user?: UserWhereInput | null;
+  readonly user_is_null?: Scalars['Boolean'] | null;
+  readonly charge?: Scalars['String'] | null;
+  readonly charge_not?: Scalars['String'] | null;
+  readonly charge_contains?: Scalars['String'] | null;
+  readonly charge_not_contains?: Scalars['String'] | null;
+  readonly charge_starts_with?: Scalars['String'] | null;
+  readonly charge_not_starts_with?: Scalars['String'] | null;
+  readonly charge_ends_with?: Scalars['String'] | null;
+  readonly charge_not_ends_with?: Scalars['String'] | null;
+  readonly charge_i?: Scalars['String'] | null;
+  readonly charge_not_i?: Scalars['String'] | null;
+  readonly charge_contains_i?: Scalars['String'] | null;
+  readonly charge_not_contains_i?: Scalars['String'] | null;
+  readonly charge_starts_with_i?: Scalars['String'] | null;
+  readonly charge_not_starts_with_i?: Scalars['String'] | null;
+  readonly charge_ends_with_i?: Scalars['String'] | null;
+  readonly charge_not_ends_with_i?: Scalars['String'] | null;
+  readonly charge_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly charge_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
+};
+
+export type OrderWhereUniqueInput = {
+  readonly id: Scalars['ID'];
+};
+
+export type SortOrdersBy =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'total_ASC'
+  | 'total_DESC'
+  | 'items_ASC'
+  | 'items_DESC'
+  | 'user_ASC'
+  | 'user_DESC'
+  | 'charge_ASC'
+  | 'charge_DESC';
+
+export type OrderUpdateInput = {
+  readonly total?: Scalars['Int'] | null;
+  readonly items?: OrderItemRelateToManyInput | null;
+  readonly user?: UserRelateToOneInput | null;
+  readonly charge?: Scalars['String'] | null;
+};
+
+export type OrdersUpdateInput = {
+  readonly id: Scalars['ID'];
+  readonly data?: OrderUpdateInput | null;
+};
+
+export type OrderCreateInput = {
+  readonly total?: Scalars['Int'] | null;
+  readonly items?: OrderItemRelateToManyInput | null;
+  readonly user?: UserRelateToOneInput | null;
+  readonly charge?: Scalars['String'] | null;
+};
+
+export type OrdersCreateInput = {
+  readonly data?: OrderCreateInput | null;
+};
+
 export type _ksListsMetaInput = {
   readonly key?: Scalars['String'] | null;
   readonly auxiliary?: Scalars['Boolean'] | null;
@@ -461,6 +699,7 @@ export type UserListTypeInfo = {
     | 'name'
     | 'email'
     | 'password'
+    | 'orders'
     | 'passwordResetToken'
     | 'passwordResetIssuedAt'
     | 'passwordResetRedeemedAt'
@@ -472,6 +711,7 @@ export type UserListTypeInfo = {
     readonly name?: string | null;
     readonly email?: string | null;
     readonly password?: string | null;
+    readonly orders?: string | null;
     readonly passwordResetToken?: string | null;
     readonly passwordResetIssuedAt?: Date | null;
     readonly passwordResetRedeemedAt?: Date | null;
@@ -584,8 +824,91 @@ export type FundraiserImageListFn = (
   FundraiserImageListTypeInfo['fields']
 >;
 
+export type OrderItemListTypeInfo = {
+  key: 'OrderItem';
+  fields:
+    | 'id'
+    | 'name'
+    | 'description'
+    | 'amount'
+    | 'goal'
+    | 'dateCreated'
+    | 'photo'
+    | 'order';
+  backing: {
+    readonly id: string;
+    readonly name?: string | null;
+    readonly description?: string | null;
+    readonly amount?: number | null;
+    readonly goal?: number | null;
+    readonly dateCreated?: Date | null;
+    readonly photo?: string | null;
+    readonly order?: string | null;
+  };
+  inputs: {
+    where: OrderItemWhereInput;
+    create: OrderItemCreateInput;
+    update: OrderItemUpdateInput;
+  };
+  args: {
+    listQuery: {
+      readonly where?: OrderItemWhereInput | null;
+      readonly sortBy?: ReadonlyArray<SortOrderItemsBy> | null;
+      readonly first?: Scalars['Int'] | null;
+      readonly skip?: Scalars['Int'] | null;
+    };
+  };
+};
+
+export type OrderItemListFn = (
+  listConfig: import('@keystone-next/keystone/schema').ListConfig<
+    OrderItemListTypeInfo,
+    OrderItemListTypeInfo['fields']
+  >
+) => import('@keystone-next/keystone/schema').ListConfig<
+  OrderItemListTypeInfo,
+  OrderItemListTypeInfo['fields']
+>;
+
+export type OrderListTypeInfo = {
+  key: 'Order';
+  fields: 'id' | 'label' | 'total' | 'items' | 'user' | 'charge';
+  backing: {
+    readonly id: string;
+    readonly total?: number | null;
+    readonly items?: string | null;
+    readonly user?: string | null;
+    readonly charge?: string | null;
+  };
+  inputs: {
+    where: OrderWhereInput;
+    create: OrderCreateInput;
+    update: OrderUpdateInput;
+  };
+  args: {
+    listQuery: {
+      readonly where?: OrderWhereInput | null;
+      readonly sortBy?: ReadonlyArray<SortOrdersBy> | null;
+      readonly first?: Scalars['Int'] | null;
+      readonly skip?: Scalars['Int'] | null;
+    };
+  };
+};
+
+export type OrderListFn = (
+  listConfig: import('@keystone-next/keystone/schema').ListConfig<
+    OrderListTypeInfo,
+    OrderListTypeInfo['fields']
+  >
+) => import('@keystone-next/keystone/schema').ListConfig<
+  OrderListTypeInfo,
+  OrderListTypeInfo['fields']
+>;
+
 export type KeystoneListsTypeInfo = {
   readonly User: UserListTypeInfo;
   readonly Fundraiser: FundraiserListTypeInfo;
   readonly FundraiserImage: FundraiserImageListTypeInfo;
+  readonly OrderItem: OrderItemListTypeInfo;
+  readonly Order: OrderListTypeInfo;
 };
