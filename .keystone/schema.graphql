@@ -1063,7 +1063,7 @@ type Mutation {
   createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
   sendUserPasswordResetLink(email: String!): SendUserPasswordResetLinkResult
   redeemUserPasswordResetToken(email: String!, token: String!, password: String!): RedeemUserPasswordResetTokenResult
-  checkout(token: String!, amount: String!, fundraiserId: String!): Order
+  checkout(token: String!, amount: Int!, fundraiserId: String!): Order
   endSession: Boolean!
 }
 
