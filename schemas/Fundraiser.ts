@@ -23,13 +23,17 @@ export const Fundraiser = list({
         { label: 'Available', value: 'AVAILABLE' },
         { label: 'Unavailable', value: 'UNAVAILABLE' },
       ],
-      defaultValue: 'DRAFT',
+      defaultValue: 'AVAILABLE',
       ui: {
         displayMode: 'segmented-control',
       },
     }),
-    amount: integer(),
-    goal: integer(),
+    amount: integer({
+      label: 'Amount (in cents)',
+    }),
+    goal: integer({
+      label: 'Goal (in cents)',
+    }),
     dateCreated: timestamp({ defaultValue: new Date().toISOString() }),
     photo: relationship({
       ref: 'FundraiserImage.fundraiser',
