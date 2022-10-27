@@ -15,7 +15,7 @@ import { sendPasswordResetEmail } from './lib/mail';
 import { extendGraphqlSchema } from './mutations';
 
 const databaseURL =
-  process.env.DATABASE_URL || 'mongodb://localhost/keystone-fundeserved';
+  process.env.DATABASE_URL || 'mongodb://localhost/keystone-gofundyourself';
 
 const sessionConfig = {
   maxAge: 60 * 60 * 24 * 365,

@@ -7,6 +7,38 @@ type Scalars = {
   readonly JSON: import('@keystone-next/types').JSONValue;
 };
 
+export type CloudinaryImageFormat = {
+  readonly prettyName?: Scalars['String'] | null;
+  readonly width?: Scalars['String'] | null;
+  readonly height?: Scalars['String'] | null;
+  readonly crop?: Scalars['String'] | null;
+  readonly aspect_ratio?: Scalars['String'] | null;
+  readonly gravity?: Scalars['String'] | null;
+  readonly zoom?: Scalars['String'] | null;
+  readonly x?: Scalars['String'] | null;
+  readonly y?: Scalars['String'] | null;
+  readonly format?: Scalars['String'] | null;
+  readonly fetch_format?: Scalars['String'] | null;
+  readonly quality?: Scalars['String'] | null;
+  readonly radius?: Scalars['String'] | null;
+  readonly angle?: Scalars['String'] | null;
+  readonly effect?: Scalars['String'] | null;
+  readonly opacity?: Scalars['String'] | null;
+  readonly border?: Scalars['String'] | null;
+  readonly background?: Scalars['String'] | null;
+  readonly overlay?: Scalars['String'] | null;
+  readonly underlay?: Scalars['String'] | null;
+  readonly default_image?: Scalars['String'] | null;
+  readonly delay?: Scalars['String'] | null;
+  readonly color?: Scalars['String'] | null;
+  readonly color_space?: Scalars['String'] | null;
+  readonly dpr?: Scalars['String'] | null;
+  readonly page?: Scalars['String'] | null;
+  readonly density?: Scalars['String'] | null;
+  readonly flags?: Scalars['String'] | null;
+  readonly transformation?: Scalars['String'] | null;
+};
+
 export type DonationRelateToManyInput = {
   readonly create?: ReadonlyArray<DonationCreateInput | null> | null;
   readonly connect?: ReadonlyArray<DonationWhereUniqueInput | null> | null;
@@ -58,6 +90,10 @@ export type UserWhereInput = {
   readonly email_in?: ReadonlyArray<Scalars['String'] | null> | null;
   readonly email_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
   readonly password_is_set?: Scalars['Boolean'] | null;
+  readonly avatar?: Scalars['String'] | null;
+  readonly avatar_not?: Scalars['String'] | null;
+  readonly avatar_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly avatar_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
   readonly donations_every?: DonationWhereInput | null;
   readonly donations_some?: DonationWhereInput | null;
   readonly donations_none?: DonationWhereInput | null;
@@ -139,6 +175,7 @@ export type UserUpdateInput = {
   readonly name?: Scalars['String'] | null;
   readonly email?: Scalars['String'] | null;
   readonly password?: Scalars['String'] | null;
+  readonly avatar?: any | null;
   readonly donations?: DonationRelateToManyInput | null;
   readonly passwordResetToken?: Scalars['String'] | null;
   readonly passwordResetIssuedAt?: Scalars['String'] | null;
@@ -157,6 +194,7 @@ export type UserCreateInput = {
   readonly name?: Scalars['String'] | null;
   readonly email?: Scalars['String'] | null;
   readonly password?: Scalars['String'] | null;
+  readonly avatar?: any | null;
   readonly donations?: DonationRelateToManyInput | null;
   readonly passwordResetToken?: Scalars['String'] | null;
   readonly passwordResetIssuedAt?: Scalars['String'] | null;
@@ -315,38 +353,6 @@ export type FundraiserCreateInput = {
 
 export type FundraisersCreateInput = {
   readonly data?: FundraiserCreateInput | null;
-};
-
-export type CloudinaryImageFormat = {
-  readonly prettyName?: Scalars['String'] | null;
-  readonly width?: Scalars['String'] | null;
-  readonly height?: Scalars['String'] | null;
-  readonly crop?: Scalars['String'] | null;
-  readonly aspect_ratio?: Scalars['String'] | null;
-  readonly gravity?: Scalars['String'] | null;
-  readonly zoom?: Scalars['String'] | null;
-  readonly x?: Scalars['String'] | null;
-  readonly y?: Scalars['String'] | null;
-  readonly format?: Scalars['String'] | null;
-  readonly fetch_format?: Scalars['String'] | null;
-  readonly quality?: Scalars['String'] | null;
-  readonly radius?: Scalars['String'] | null;
-  readonly angle?: Scalars['String'] | null;
-  readonly effect?: Scalars['String'] | null;
-  readonly opacity?: Scalars['String'] | null;
-  readonly border?: Scalars['String'] | null;
-  readonly background?: Scalars['String'] | null;
-  readonly overlay?: Scalars['String'] | null;
-  readonly underlay?: Scalars['String'] | null;
-  readonly default_image?: Scalars['String'] | null;
-  readonly delay?: Scalars['String'] | null;
-  readonly color?: Scalars['String'] | null;
-  readonly color_space?: Scalars['String'] | null;
-  readonly dpr?: Scalars['String'] | null;
-  readonly page?: Scalars['String'] | null;
-  readonly density?: Scalars['String'] | null;
-  readonly flags?: Scalars['String'] | null;
-  readonly transformation?: Scalars['String'] | null;
 };
 
 export type FundraiserRelateToOneInput = {
@@ -640,6 +646,7 @@ export type UserListTypeInfo = {
     | 'name'
     | 'email'
     | 'password'
+    | 'avatar'
     | 'donations'
     | 'passwordResetToken'
     | 'passwordResetIssuedAt'
@@ -652,6 +659,7 @@ export type UserListTypeInfo = {
     readonly name?: string | null;
     readonly email?: string | null;
     readonly password?: string | null;
+    readonly avatar?: any;
     readonly donations?: string | null;
     readonly passwordResetToken?: string | null;
     readonly passwordResetIssuedAt?: Date | null;
