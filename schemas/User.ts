@@ -1,4 +1,4 @@
-import { text, password, relationship } from '@keystone-next/fields';
+import { text, password, relationship, timestamp } from '@keystone-next/fields';
 import { cloudinaryImage } from '@keystone-next/cloudinary';
 import { list } from '@keystone-next/keystone/schema';
 import { cloudinary } from '../lib/cloudinary';
@@ -17,6 +17,7 @@ export const User = list({
       },
       label: 'Source',
     }),
+    createdOn: timestamp({ defaultValue: new Date().toISOString() }),
     donations: relationship({ ref: 'Donation.user', many: true }),
   },
 });

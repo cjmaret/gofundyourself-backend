@@ -61,6 +61,7 @@ type User {
   email: String
   password_is_set: Boolean
   avatar: CloudinaryImage_File
+  createdOn: String
   donations(where: DonationWhereInput, search: String, sortBy: [SortDonationsBy!], orderBy: String, first: Int, skip: Int): [Donation!]!
   _donationsMeta(where: DonationWhereInput, search: String, sortBy: [SortDonationsBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
   passwordResetToken_is_set: Boolean
@@ -119,6 +120,14 @@ input UserWhereInput {
   avatar_not: String
   avatar_in: [String]
   avatar_not_in: [String]
+  createdOn: String
+  createdOn_not: String
+  createdOn_lt: String
+  createdOn_lte: String
+  createdOn_gt: String
+  createdOn_gte: String
+  createdOn_in: [String]
+  createdOn_not_in: [String]
 
   """ condition must be true for all nodes """
   donations_every: DonationWhereInput
@@ -175,6 +184,8 @@ enum SortUsersBy {
   name_DESC
   email_ASC
   email_DESC
+  createdOn_ASC
+  createdOn_DESC
   donations_ASC
   donations_DESC
   passwordResetIssuedAt_ASC
@@ -192,6 +203,7 @@ input UserUpdateInput {
   email: String
   password: String
   avatar: Upload
+  createdOn: String
   donations: DonationRelateToManyInput
   passwordResetToken: String
   passwordResetIssuedAt: String
@@ -211,6 +223,7 @@ input UserCreateInput {
   email: String
   password: String
   avatar: Upload
+  createdOn: String
   donations: DonationRelateToManyInput
   passwordResetToken: String
   passwordResetIssuedAt: String

@@ -94,6 +94,14 @@ export type UserWhereInput = {
   readonly avatar_not?: Scalars['String'] | null;
   readonly avatar_in?: ReadonlyArray<Scalars['String'] | null> | null;
   readonly avatar_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly createdOn?: Scalars['String'] | null;
+  readonly createdOn_not?: Scalars['String'] | null;
+  readonly createdOn_lt?: Scalars['String'] | null;
+  readonly createdOn_lte?: Scalars['String'] | null;
+  readonly createdOn_gt?: Scalars['String'] | null;
+  readonly createdOn_gte?: Scalars['String'] | null;
+  readonly createdOn_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly createdOn_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
   readonly donations_every?: DonationWhereInput | null;
   readonly donations_some?: DonationWhereInput | null;
   readonly donations_none?: DonationWhereInput | null;
@@ -160,6 +168,8 @@ export type SortUsersBy =
   | 'name_DESC'
   | 'email_ASC'
   | 'email_DESC'
+  | 'createdOn_ASC'
+  | 'createdOn_DESC'
   | 'donations_ASC'
   | 'donations_DESC'
   | 'passwordResetIssuedAt_ASC'
@@ -176,6 +186,7 @@ export type UserUpdateInput = {
   readonly email?: Scalars['String'] | null;
   readonly password?: Scalars['String'] | null;
   readonly avatar?: any | null;
+  readonly createdOn?: Scalars['String'] | null;
   readonly donations?: DonationRelateToManyInput | null;
   readonly passwordResetToken?: Scalars['String'] | null;
   readonly passwordResetIssuedAt?: Scalars['String'] | null;
@@ -195,6 +206,7 @@ export type UserCreateInput = {
   readonly email?: Scalars['String'] | null;
   readonly password?: Scalars['String'] | null;
   readonly avatar?: any | null;
+  readonly createdOn?: Scalars['String'] | null;
   readonly donations?: DonationRelateToManyInput | null;
   readonly passwordResetToken?: Scalars['String'] | null;
   readonly passwordResetIssuedAt?: Scalars['String'] | null;
@@ -647,6 +659,7 @@ export type UserListTypeInfo = {
     | 'email'
     | 'password'
     | 'avatar'
+    | 'createdOn'
     | 'donations'
     | 'passwordResetToken'
     | 'passwordResetIssuedAt'
@@ -660,6 +673,7 @@ export type UserListTypeInfo = {
     readonly email?: string | null;
     readonly password?: string | null;
     readonly avatar?: any;
+    readonly createdOn?: Date | null;
     readonly donations?: string | null;
     readonly passwordResetToken?: string | null;
     readonly passwordResetIssuedAt?: Date | null;
