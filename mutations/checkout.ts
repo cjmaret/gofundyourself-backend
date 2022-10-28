@@ -54,11 +54,7 @@ async function checkout(
       total: charge.amount,
       charge: charge.id,
       user: { connect: { id: userId } },
-      name: fundraiser.name,
-      description: fundraiser.description,
-      amount,
-      goal: fundraiser.goal,
-      photo: { connect: { id: fundraiser.photo.id } },
+      fundraiser: { connect: { id: fundraiserId } },
     },
     resolveFields: false,
   });

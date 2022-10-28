@@ -44,5 +44,6 @@ export const Fundraiser = list({
         inlineEdit: { fields: ['image', 'altText'] },
       },
     }),
+    donations: relationship({ ref: 'Donation.fundraiser', many: true }),
   },
 });
