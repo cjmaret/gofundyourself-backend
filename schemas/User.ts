@@ -19,5 +19,6 @@ export const User = list({
     }),
     createdOn: timestamp({ defaultValue: new Date().toISOString() }),
     donations: relationship({ ref: 'Donation.user', many: true }),
+    fundraisers: relationship({ ref: 'Fundraiser.owner', many: true }),
   },
 });

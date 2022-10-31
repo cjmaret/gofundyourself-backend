@@ -1,4 +1,10 @@
-import { integer, relationship, text, virtual } from '@keystone-next/fields';
+import {
+  integer,
+  relationship,
+  text,
+  timestamp,
+  virtual,
+} from '@keystone-next/fields';
 
 import { list } from '@keystone-next/keystone/schema';
 import formatMoney from '../lib/formatMoney';
@@ -16,5 +22,6 @@ export const Donation = list({
     charge: text(),
     user: relationship({ ref: 'User.donations' }),
     fundraiser: relationship({ ref: 'Fundraiser.donations' }),
+    dateCreated: timestamp({ defaultValue: new Date().toISOString() }),
   },
 });
