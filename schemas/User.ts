@@ -15,7 +15,7 @@ export const User = list({
         ...cloudinary,
         folder: 'gofundyourself/user-images',
       },
-      label: 'Source',
+      label: 'Avatar',
     }),
     createdOn: timestamp({ defaultValue: new Date().toISOString() }),
     donations: relationship({ ref: 'Donation.user', many: true }),
