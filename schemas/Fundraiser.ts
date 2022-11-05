@@ -7,9 +7,18 @@ import {
 } from '@keystone-next/fields';
 
 import { list } from '@keystone-next/keystone/schema';
+import { isSignedIn, permissions, rules } from '../access';
 
 export const Fundraiser = list({
-  // TODO: access
+  access: {
+    create: isSignedIn,
+    read: rules.canReadFundraisers,
+    update: rules.canManageFundraisers,
+    delete: rules.canManageFundraisers,
+  },
+  ui: {
+    hideDelete: (args) => !permissions.canManageFundraisers(args),
+  },
   fields: {
     name: text({ isRequired: true }),
     description: text({
@@ -20,10 +29,9 @@ export const Fundraiser = list({
     status: select({
       options: [
         { label: 'Draft', value: 'DRAFT' },
-        { label: 'Available', value: 'AVAILABLE' },
-        { label: 'Unavailable', value: 'UNAVAILABLE' },
+        { label: 'Active', value: 'ACTIVE' },
       ],
-      defaultValue: 'AVAILABLE',
+      defaultValue: 'ACTIVE',
       ui: {
         displayMode: 'segmented-control',
       },
@@ -44,7 +52,12 @@ export const Fundraiser = list({
         inlineEdit: { fields: ['image', 'altText'] },
       },
     }),
-    owner: relationship({ ref: 'User.fundraisers' }),
+    user: relationship({
+      ref: 'User.fundraisers',
+      defaultValue: ({ context }) => ({
+        connect: { id: context.session.itemId },
+      }),
+    }),
     donations: relationship({ ref: 'Donation.fundraiser', many: true }),
   },
 });

@@ -7,10 +7,23 @@ import {
 } from '@keystone-next/fields';
 
 import { list } from '@keystone-next/keystone/schema';
+import { isSignedIn, permissions, rules } from '../access';
 import formatMoney from '../lib/formatMoney';
 
 export const Donation = list({
-  // TODO: access
+  access: {
+    create: isSignedIn,
+    read: () => true,
+    update: () => false,
+    delete: () => false,
+  },
+  ui: {
+    hideCreate: () => true,
+    hideDelete: () => true,
+    itemView: {
+      defaultFieldMode: 'read',
+    },
+  },
   fields: {
     donation: virtual({
       graphQLReturnType: 'String',
@@ -19,7 +32,7 @@ export const Donation = list({
       },
     }),
     total: integer(),
-    charge: text(),
+    charge: text({}),
     user: relationship({ ref: 'User.donations' }),
     fundraiser: relationship({ ref: 'Fundraiser.donations' }),
     dateCreated: timestamp({ defaultValue: new Date().toISOString() }),

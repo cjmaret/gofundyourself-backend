@@ -16,7 +16,7 @@ async function checkout(
 ): Promise<OrderCreateInput> {
   const userId = context.session.itemId;
   if (!userId) {
-    throw new Error('Sorry! You must be signed in to create an order!');
+    throw new Error('Sorry! You must be signed in to create a donation!');
   }
 
   const fundraiser = await context.lists.Fundraiser.findOne({
