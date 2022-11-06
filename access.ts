@@ -19,16 +19,12 @@ export const permissions = {
 };
 
 export const rules = {
-  canReadFundraisers({ session }: ListAccessArgs) {
-    if (!isSignedIn({ session })) {
-      return false;
-    }
-
-    if (permissions.canManageFundraisers({ session })) {
-      return true;
-    }
-    return { OR: [{ user: { id: session.itemId } }, { status: 'ACTIVE' }] };
-  },
+  // canReadFundraisers({ session }: ListAccessArgs) {
+  //   if (permissions.canManageFundraisers({ session })) {
+  //     return true;
+  //   }
+  //   return { OR: [{ user: { id: session.itemId } }, { status: 'ACTIVE' }] };
+  // },
 
   canManageFundraisers({ session }: ListAccessArgs) {
     if (!isSignedIn({ session })) {

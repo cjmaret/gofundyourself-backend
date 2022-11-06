@@ -1,7 +1,7 @@
 import { cloudinaryImage } from '@keystone-next/cloudinary';
 import { relationship, text } from '@keystone-next/fields';
 import { list } from '@keystone-next/keystone/schema';
-import { isSignedIn, permissions } from '../access';
+import { isSignedIn, permissions, rules } from '../access';
 import { cloudinary } from '../lib/cloudinary';
 
 export const FundraiserImage = list({
@@ -9,7 +9,7 @@ export const FundraiserImage = list({
     create: isSignedIn,
     read: () => true,
     update: permissions.canManageFundraisers,
-    delete: permissions.canManageFundraisers,
+    delete: rules.canManageFundraisers,
   },
   fields: {
     image: cloudinaryImage({
@@ -18,6 +18,12 @@ export const FundraiserImage = list({
     }),
     altText: text(),
     fundraiser: relationship({ ref: 'Fundraiser.photo' }),
+    user: relationship({
+      ref: 'User.fundraiserImage',
+      defaultValue: ({ context }) => ({
+        connect: { id: context.session.itemId },
+      }),
+    }),
   },
   ui: {
     listView: {

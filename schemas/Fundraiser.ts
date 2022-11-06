@@ -12,7 +12,7 @@ import { isSignedIn, permissions, rules } from '../access';
 export const Fundraiser = list({
   access: {
     create: isSignedIn,
-    read: rules.canReadFundraisers,
+    read: () => true,
     update: rules.canManageFundraisers,
     delete: rules.canManageFundraisers,
   },
