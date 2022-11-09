@@ -17,7 +17,7 @@ export const Fundraiser = list({
     delete: rules.canManageFundraisers,
   },
   ui: {
-    hideDelete: (args) => !permissions.canManageFundraisers(args),
+    // hideDelete: (args) => !rules.canManageFundraisers(args),
   },
   fields: {
     name: text({ isRequired: true }),
