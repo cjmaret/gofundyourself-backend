@@ -33,7 +33,6 @@ const { withAuth } = createAuth({
   },
   passwordResetLink: {
     async sendToken(args) {
-      // send the email
       await sendPasswordResetEmail(args.token, args.identity);
     },
   },
@@ -65,14 +64,11 @@ export default withAuth(
     }),
     extendGraphqlSchema,
     ui: {
-      // TDO: show the UI only for people who pass this test
       isAccessAllowed: ({ session }) => {
-        // console.log(session)
         return !!session?.data;
       },
     },
     session: withItemData(statelessSessions(sessionConfig), {
-      // GraphQL Query
       User: `id name email role { ${permissionsList.join(' ')} }`,
     }),
   })

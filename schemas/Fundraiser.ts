@@ -7,7 +7,7 @@ import {
 } from '@keystone-next/fields';
 
 import { list } from '@keystone-next/keystone/schema';
-import { isSignedIn, permissions, rules } from '../access';
+import { isSignedIn, rules } from '../access';
 
 export const Fundraiser = list({
   access: {
@@ -15,9 +15,6 @@ export const Fundraiser = list({
     read: () => true,
     update: rules.canManageFundraisers,
     delete: rules.canManageFundraisers,
-  },
-  ui: {
-    // hideDelete: (args) => !rules.canManageFundraisers(args),
   },
   fields: {
     name: text({ isRequired: true }),

@@ -23,15 +23,10 @@ function createEmail(text: string): string {
   `;
 }
 
-// interface MailResponse {
-//   message: string;
-// }
-
 export async function sendPasswordResetEmail(
   resetToken: string,
   to: string
 ): Promise<void> {
-  // email the user a token
   const info = await transport.sendMail({
     to,
     from: 'text@example.com',

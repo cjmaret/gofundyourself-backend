@@ -48,7 +48,6 @@ async function checkout(
       throw new Error(err.message);
     });
 
-  // 5. Create the order and return it
   const donation = await context.lists.Donation.createOne({
     data: {
       total: charge.amount,
