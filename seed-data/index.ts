@@ -1,7 +1,7 @@
 import { fundraisers } from './new-data';
 
 export async function insertSeedData(ks: any) {
-  // Keystone API changed, so we need to check for both versions to get keystone
+  // check for both versions of Keystone API to get keystone
   const keystone = ks.keystone || ks;
   const adapter = keystone.adapters?.MongooseAdapter || keystone.adapter;
 
