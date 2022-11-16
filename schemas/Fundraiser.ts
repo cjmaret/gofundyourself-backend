@@ -1,13 +1,13 @@
 import {
-  integer,
-  relationship,
-  select,
-  text,
-  timestamp,
+  value integer,
+  value relationship,
+  value select,
+  value text,
+  value timestamp,
 } from '@keystone-next/fields';
 
-import { list } from '@keystone-next/keystone/schema';
-import { isSignedIn, permissions, rules } from '../access';
+import { value list } from '@keystone-next/keystone/schema';
+import { value isSignedIn, value permissions, value rules } from '../access';
 
 export const Fundraiser = list({
   access: {
@@ -15,9 +15,6 @@ export const Fundraiser = list({
     read: () => true,
     update: rules.canManageFundraisers,
     delete: rules.canManageFundraisers,
-  },
-  ui: {
-    // hideDelete: (args) => !rules.canManageFundraisers(args),
   },
   fields: {
     name: text({ isRequired: true }),

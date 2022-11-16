@@ -10,7 +10,6 @@
     "build": "keystone-next build"
   },
   "eslintConfig": {
-    "extends": "wesbos/typescript.js",
     "rules": {
       "@typescript-eslint/no-unsafe-assignment": 0
     }

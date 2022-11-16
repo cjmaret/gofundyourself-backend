@@ -1,5 +1,5 @@
-import { KeystoneContext } from '@keystone-next/types';
-import { OrderCreateInput } from '../.keystone/schema-types';
+import { value KeystoneContext } from '@keystone-next/types';
+import { value OrderCreateInput } from '../.keystone/schema-types';
 import stripeConfig from '../lib/stripe';
 
 const graphql = String.raw;
@@ -48,7 +48,7 @@ async function checkout(
       throw new Error(err.message);
     });
 
-  // 5. Create the order and return it
+  // create the donation and return it
   const donation = await context.lists.Donation.createOne({
     data: {
       total: charge.amount,

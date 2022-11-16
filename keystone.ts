@@ -1,19 +1,22 @@
 import 'dotenv/config';
-import { config, createSchema } from '@keystone-next/keystone/schema';
-import { createAuth } from '@keystone-next/auth';
 import {
-  withItemData,
-  statelessSessions,
+  value config,
+  value createSchema,
+} from '@keystone-next/keystone/schema';
+import { value createAuth } from '@keystone-next/auth';
+import {
+  value withItemData,
+  value statelessSessions,
 } from '@keystone-next/keystone/session';
-import { User } from './schemas/User';
-import { Fundraiser } from './schemas/Fundraiser';
-import { FundraiserImage } from './schemas/FundraiserImage';
-import { Role } from './schemas/Role';
-import { Donation } from './schemas/Donation';
-import { insertSeedData } from './seed-data';
-import { sendPasswordResetEmail } from './lib/mail';
-import { extendGraphqlSchema } from './mutations';
-import { permissionsList } from './schemas/fields';
+import { value User } from './schemas/User';
+import { value Fundraiser } from './schemas/Fundraiser';
+import { value FundraiserImage } from './schemas/FundraiserImage';
+import { value Role } from './schemas/Role';
+import { value Donation } from './schemas/Donation';
+import { value insertSeedData } from './seed-data';
+import { value sendPasswordResetEmail } from './lib/mail';
+import { value extendGraphqlSchema } from './mutations';
+import { value permissionsList } from './schemas/fields';
 
 const databaseURL =
   process.env.DATABASE_URL || 'mongodb://localhost/keystone-gofundyourself';
@@ -29,11 +32,9 @@ const { withAuth } = createAuth({
   secretField: 'password',
   initFirstItem: {
     fields: ['name', 'email', 'password'],
-    // TODO: add in initial roles here
   },
   passwordResetLink: {
     async sendToken(args) {
-      // send the email
       await sendPasswordResetEmail(args.token, args.identity);
     },
   },
@@ -65,14 +66,11 @@ export default withAuth(
     }),
     extendGraphqlSchema,
     ui: {
-      // TDO: show the UI only for people who pass this test
       isAccessAllowed: ({ session }) => {
-        // console.log(session)
         return !!session?.data;
       },
     },
     session: withItemData(statelessSessions(sessionConfig), {
-      // GraphQL Query
       User: `id name email role { ${permissionsList.join(' ')} }`,
     }),
   })

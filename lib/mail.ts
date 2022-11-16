@@ -1,4 +1,4 @@
-import { createTransport, getTestMessageUrl } from 'nodemailer';
+import { value createTransport, value getTestMessageUrl } from 'nodemailer';
 
 const transport = createTransport({
   host: process.env.MAIL_HOST,
@@ -22,10 +22,6 @@ function createEmail(text: string): string {
   <p>${text}</p>
   `;
 }
-
-// interface MailResponse {
-//   message: string;
-// }
 
 export async function sendPasswordResetEmail(
   resetToken: string,
