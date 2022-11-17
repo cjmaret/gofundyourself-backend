@@ -8,7 +8,6 @@ export const User = list({
   access: {
     create: () => true,
     read: () => true,
-    update: rules.canManageUsers,
     delete: permissions.canManageUsers,
   },
   ui: {
@@ -16,20 +15,67 @@ export const User = list({
     hideDelete: (args) => !permissions.canManageUsers(args),
   },
   fields: {
-    name: text({ isRequired: true }),
-    email: text({ isRequired: true, isUnique: true }),
-    password: password(),
+    name: text({
+      isRequired: true,
+      access: {
+        update: rules.canManageUsers,
+      },
+    }),
+    email: text({
+      isRequired: true,
+      isUnique: true,
+      access: {
+        update: rules.canManageUsers,
+      },
+    }),
+    password: password({
+      access: {
+        update: rules.canManageUsers,
+      },
+    }),
     avatar: cloudinaryImage({
       cloudinary: {
         ...cloudinary,
         folder: 'gofundyourself/user-images',
       },
       label: 'Avatar',
+      access: {
+        update: rules.canManageUsers,
+      },
     }),
-    createdOn: timestamp({ defaultValue: new Date().toISOString() }),
-    donations: relationship({ ref: 'Donation.user', many: true }),
-    fundraisers: relationship({ ref: 'Fundraiser.user', many: true }),
-    fundraiserImage: relationship({ ref: 'FundraiserImage.user', many: true }),
+    createdOn: timestamp({
+      defaultValue: new Date().toISOString(),
+      access: {
+        update: rules.canManageUsers,
+      },
+    }),
+    donations: relationship({
+      ref: 'Donation.user',
+      many: true,
+      ui: {
+        hideCreate: true,
+      },
+      access: {
+        update: () => false,
+      },
+    }),
+    fundraisers: relationship({
+      ref: 'Fundraiser.user',
+      many: true,
+      ui: {
+        hideCreate: true,
+      },
+      access: {
+        update: rules.canManageUsers,
+      },
+    }),
+    fundraiserImage: relationship({
+      ref: 'FundraiserImage.user',
+      many: true,
+      access: {
+        update: rules.canManageUsers,
+      },
+    }),
     role: relationship({
       ref: 'Role.assignedTo',
       access: {

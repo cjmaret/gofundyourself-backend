@@ -24,12 +24,12 @@ export const rules = {
     if (!isSignedIn({ session })) {
       return false;
     }
-    // admin?
+    // is admin?
     if (permissions.canManageFundraisers({ session })) {
       return true;
     }
 
-    // owner?
+    // is owner?
     if (args.item.user == args.session.itemId) {
       return true;
     }
@@ -37,13 +37,23 @@ export const rules = {
     return false;
   },
 
-  canManageUsers({ session }: ListAccessArgs) {
+  canManageUsers(args) {
+    const { session } = args;
+
     if (!isSignedIn({ session })) {
       return false;
     }
+
+    // is admin?
     if (permissions.canManageUsers({ session })) {
       return true;
     }
-    return { id: session.itemId };
+
+    // is user?
+    if (args.itemId == args.session.itemId) {
+      return true;
+    }
+
+    return false;
   },
 };
