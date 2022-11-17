@@ -19,16 +19,22 @@ export const permissions = {
 };
 
 export const rules = {
-  canManageFundraisers({ session }: ListAccessArgs) {
+  canManageFundraisers(args) {
+    const { session } = args;
     if (!isSignedIn({ session })) {
       return false;
     }
-
+    // admin?
     if (permissions.canManageFundraisers({ session })) {
       return true;
     }
 
-    return { user: { id: session.itemId } };
+    // owner?
+    if (args.item.user == args.session.itemId) {
+      return true;
+    }
+
+    return false;
   },
 
   canManageUsers({ session }: ListAccessArgs) {
