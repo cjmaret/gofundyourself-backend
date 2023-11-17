@@ -29,6 +29,9 @@ export const rules = {
       return true;
     }
 
+    console.log(args.item);
+    console.log(args.session);
+
     // is owner?
     if (args.item.user == args.session.itemId) {
       return true;
