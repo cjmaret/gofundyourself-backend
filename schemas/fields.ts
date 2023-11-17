@@ -10,7 +10,7 @@ export const permissionFields = {
     label: 'User can query other users',
   }),
   canManageUsers: checkbox({
-    defaultValue: false,
+    defaultValue: true,
     label: 'User can Edit other users',
   }),
   canManageRoles: checkbox({
