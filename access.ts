@@ -29,8 +29,7 @@ export const rules = {
       return true;
     }
 
-    console.log(args.item);
-    console.log(args.session);
+    console.log(args);
 
     // is owner?
     if (args.item.user == args.session.itemId) {
