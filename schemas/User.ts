@@ -79,8 +79,8 @@ export const User = list({
     role: relationship({
       ref: 'Role.assignedTo',
       access: {
-        create: permissions.canManageUsers,
-        update: permissions.canManageUsers,
+        create: true,
+        update: true,
       },
     }),
   },
