@@ -29,7 +29,7 @@ export const rules = {
       return true;
     }
 
-    console.log(args.context);
+    console.log(args.context.lists.Fundraiser);
 
     // is owner?
     if (args.item?.user == session.itemId) {
