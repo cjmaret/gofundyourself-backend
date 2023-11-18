@@ -29,6 +29,9 @@ export const rules = {
       return true;
     }
 
+    let findOne = args.context.lists.Fundraiser.findOne;
+    let found = findOne(args.itemId);
+    console.log(found);
     console.log(args.context.lists.Fundraiser);
 
     // is owner?
