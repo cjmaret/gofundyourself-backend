@@ -29,10 +29,10 @@ export const rules = {
       return true;
     }
 
-    console.log(args);
+    console.log(args.context);
 
     // is owner?
-    if (args.item.user == args.session.itemId) {
+    if (args.item?.user == session.itemId) {
       return true;
     }
 
